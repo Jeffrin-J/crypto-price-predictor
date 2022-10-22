@@ -1,11 +1,29 @@
-import logo from './logo.svg';
-import { Button } from 'antd';
+import { Layout } from 'antd';
 import './App.css';
+import CoinList from './components/CoinList';
+import Navbar from './components/Navbar';
+import { useSelector } from "react-redux";
+import Forum from './components/Forum';
+import CoinDescription from './components/CoinDescription';
 
 function App() {
+
+  const active = useSelector((state) => state.active.value);
+  const coin = useSelector((state) => state.coin.value);
+
   return (
     <div className="App">
-      <Button type="primary">Button</Button>
+      <Layout className='layout'>
+        <Navbar/>
+        {coin==='' ? 
+        <>
+          {active==='coin_list' && <CoinList/>}
+          {active==='forum' && <Forum/>}
+        </>:
+        <CoinDescription/>
+        }
+        
+      </Layout>
     </div>
   );
 }

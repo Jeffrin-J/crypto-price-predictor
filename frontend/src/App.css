@@ -1,7 +1,16 @@
 @import '~antd/dist/antd.css';
 
+#root {
+  height: 100%;
+}
+
 .App {
   text-align: center;
+  height: 100%;
+}
+
+.layout{
+  height: 100%;
 }
 
 .App-logo {
@@ -37,4 +46,10 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.site-layout-content {
+  min-height: 100%;
+  padding: 24px;
+  background: #fff;
 }
