@@ -7,15 +7,15 @@ import Forum from './components/Forum';
 import CoinDescription from './components/CoinDescription';
 
 function App() {
-
+  
   const active = useSelector((state) => state.active.value);
   const coin = useSelector((state) => state.coin.value);
-
+  
   return (
     <div className="App">
       <Layout className='layout'>
         <Navbar/>
-        {coin==='' ? 
+        {coin===-1 ? 
         <>
           {active==='coin_list' && <CoinList/>}
           {active==='forum' && <Forum/>}

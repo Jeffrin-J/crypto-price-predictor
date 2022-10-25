@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from server.views import getOHLCData
+from server.views import GetCoinData
 from server.views import getCoinData
 from server.views import retrieveCoinData
 
@@ -23,4 +25,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/getCoins/', getCoinData),
     path('api/retrieveCoinsData/', retrieveCoinData),
+    path('api/getCoinData/<pk>/', GetCoinData.as_view()),
+    path('api/getOHLCData/<str:uuid>/', getOHLCData),
 ]

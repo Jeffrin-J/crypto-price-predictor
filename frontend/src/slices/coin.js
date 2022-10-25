@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const coin = createSlice({
     name: "coin",
     initialState: {
-      value: '',
+      value: -1,
     },
     reducers: {
       setCoin: (state, action) => {

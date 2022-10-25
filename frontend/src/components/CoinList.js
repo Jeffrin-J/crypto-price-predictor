@@ -31,7 +31,7 @@ export default function CoinList() {
             render: (value) => (
                 <Space size='small'>
                     <Image width={30} src={value[1]}/>
-                    <a onClick={() => dispatch(setCoin(value[0]))}>{value[0]}</a>
+                    <a onClick={() => {dispatch(setCoin(value[2]))}}>{value[0]}</a>
                 </Space>
             ),
         },

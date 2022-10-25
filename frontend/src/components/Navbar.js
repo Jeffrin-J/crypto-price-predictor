@@ -17,7 +17,7 @@ export default function Navbar() {
                 theme="dark"
                 mode="horizontal"
                 defaultSelectedKeys={[tab]}
-                onClick={(res)=>{setTab(res.key); dispatch(setActive(res.key)); dispatch(setCoin(''))}}
+                onClick={(res)=>{setTab(res.key); dispatch(setActive(res.key)); dispatch(setCoin(-1))}}
                 items={[{
                     key: 'coin_list',
                     label: 'Live price',
