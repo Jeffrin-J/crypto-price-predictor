@@ -1,11 +1,20 @@
 from django.contrib import admin
 
-from server.models import Coins
+from server.models import *
+
 
 # Register your models here.
 
 class CoinsAdmin(admin.ModelAdmin):
     list_display = ('rank', 'name', 'price',)
+
+class TwitterUserAdmin(admin.ModelAdmin):
+    list_display = ('id', 'username', 'name',)
+
+class TweetAdmin(admin.ModelAdmin):
+    list_display = ('id', 'text', 'author_id')
     
 
 admin.site.register(Coins, CoinsAdmin)
+admin.site.register(User, TwitterUserAdmin)
+admin.site.register(Tweet, TweetAdmin)

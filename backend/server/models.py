@@ -17,3 +17,15 @@ class Coins(models.Model):
     class Meta:
         db_table = 'Coin'
         verbose_name_plural = 'Coins'
+
+class User(models.Model):
+
+    id = models.PositiveBigIntegerField(primary_key=True)
+    name = models.CharField(max_length=100)
+    username = models.CharField(max_length=60)
+
+class Tweet(models.Model):
+
+    id = models.PositiveBigIntegerField(primary_key=True)
+    author_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    text = models.TextField()

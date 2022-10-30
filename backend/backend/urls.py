@@ -15,11 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from server.views import getOHLCData
-from server.views import GetCoinData
-from server.views import getCoinData
-from server.views import retrieveCoinData
-
+from server.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,4 +23,6 @@ urlpatterns = [
     path('api/retrieveCoinsData/', retrieveCoinData),
     path('api/getCoinData/<pk>/', GetCoinData.as_view()),
     path('api/getOHLCData/<str:uuid>/', getOHLCData),
+    path('api/getTwitterUsers/', get_twitter_users),
+    path('api/getTweets/', GetTweets.as_view()),
 ]
