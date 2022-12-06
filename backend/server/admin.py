@@ -13,7 +13,6 @@ class TwitterUserAdmin(admin.ModelAdmin):
 
 class TweetAdmin(admin.ModelAdmin):
     list_display = ('id', 'text', 'author_id')
-    
 
 admin.site.register(Coins, CoinsAdmin)
 admin.site.register(User, TwitterUserAdmin)

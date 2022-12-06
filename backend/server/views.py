@@ -4,10 +4,11 @@ from server.serializers import *
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view
-from rest_framework.generics import RetrieveAPIView, CreateAPIView
+from rest_framework.generics import RetrieveAPIView, ListCreateAPIView, CreateAPIView
 from pytwitter import Api
 
 from django.conf import settings
+from django.contrib.auth import authenticate, login
 import requests
 
 # Create your views here.
@@ -106,8 +107,21 @@ def get_tweets(request):
     print(api.get_tweets(["1261326399320715264","1278347468690915330"],expansions="author_id",tweet_fields=["created_at"], user_fields=["username","verified"]))
     return Response()
 
-class GetTweets(CreateAPIView):
+class GetTweets(ListCreateAPIView):
 
+    queryset = Tweet.objects.all()
+    serializer_class = TweetSerializer
+
+    def get(self, request, *args, **kwargs):
+        data = Tweet.objects.all()
+        ser = TweetSerializer(data, many=True)
+        data = ser.data
+
+        for i in range(len(data)):
+            user = list(User.objects.filter(id=data[i]["author_id"]))[0]
+            data[i]['name'] = user.name
+
+        return Response(data, status.HTTP_200_OK)
 
     def post(self, request):
         try:
@@ -124,15 +138,13 @@ class GetTweets(CreateAPIView):
         
         query1 = f'https://api.twitter.com/2/tweets/search/recent?query={q1}&tweet.fields=author_id'
         query2 = f'https://api.twitter.com/2/tweets/search/recent?query={q2}&tweet.fields=author_id'
-        if id is not '':
+        if id != '':
             query1 += f'&since_id={id}'
             query2 += f'&since_id={id}'
         headers = {"Authorization": f"Bearer {settings.TWITTER_BEARER_TOKEN}"}
 
         res1 = requests.get(query1, headers=headers)
         res2 = requests.get(query2, headers=headers)
-
-        print(res1.json(), res2.json())
 
         serializer1 = TweetSerializer(data=res1.json()['data'], many=True)
         serializer2 = TweetSerializer(data=res2.json()['data'], many=True)
@@ -144,4 +156,19 @@ class GetTweets(CreateAPIView):
             return Response({'message': 'Coin Data added'}, status.HTTP_201_CREATED)
 
         return Response({'message': 'Coin Data invalid'}, status.HTTP_400_BAD_REQUEST)
-    
+
+class RegisterUser(CreateAPIView):
+
+    serializer_class = CreateUserSerializer
+
+
+@api_view(['POST'])
+def login(request):
+    username = request.data['username']
+    password = request.data['password']
+    user = authenticate(request, username=username, password=password)
+
+    if user is not None:
+        return Response({'message': 'Logged in'}, status.HTTP_202_ACCEPTED)
+    else:
+        return Response({'message': 'Invalid credentials'}, status.HTTP_401_UNAUTHORIZED)

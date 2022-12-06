@@ -25,4 +25,6 @@ urlpatterns = [
     path('api/getOHLCData/<str:uuid>/', getOHLCData),
     path('api/getTwitterUsers/', get_twitter_users),
     path('api/getTweets/', GetTweets.as_view()),
+    path('api/registerUser/', RegisterUser.as_view()),
+    path('api/login/', login),
 ]

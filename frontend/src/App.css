@@ -53,3 +53,12 @@
   padding: 24px;
   background: #fff;
 }
+
+.thread{
+  width: 100%;
+  background: #ececec;
+  border-radius: 0.5em;
+  padding-top: 13px;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}

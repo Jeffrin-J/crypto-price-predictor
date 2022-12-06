@@ -11,7 +11,7 @@ const { Text } = Typography;
 
 export default function CoinList() {
 
-    const [data, setData] = useState([]);
+    const [data, setData] = useState([])
     const [filters, setFilters] = useState([])
     const dispatch = useDispatch();
 
