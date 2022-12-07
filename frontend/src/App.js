@@ -22,11 +22,6 @@ function App() {
   
   const [tweets, setTweets] = useState([])
 
-  function logout() {
-    localStorage.setItem('logged', false)
-    dispatch(setLogin(false))
-  }
-
   useEffect(() => {
       axios.get(API_URL+'/getTweets').then((res) => {
           setTweets(res.data)
@@ -37,6 +32,7 @@ function App() {
   useEffect(() => {
     if(active==='logout'){
       localStorage.setItem('logged', false)
+      localStorage.removeItem('user')
       dispatch(setLogin(false))
       dispatch(setActive('forum'))
     }

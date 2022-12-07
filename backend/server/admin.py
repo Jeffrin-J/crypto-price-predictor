@@ -14,6 +14,10 @@ class TwitterUserAdmin(admin.ModelAdmin):
 class TweetAdmin(admin.ModelAdmin):
     list_display = ('id', 'text', 'author_id')
 
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('id', 'comment', 'author_id', 'tweet_id', 'timestamp')
+
 admin.site.register(Coins, CoinsAdmin)
 admin.site.register(User, TwitterUserAdmin)
 admin.site.register(Tweet, TweetAdmin)
+admin.site.register(Comment, CommentAdmin)

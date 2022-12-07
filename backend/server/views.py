@@ -120,6 +120,7 @@ class GetTweets(ListCreateAPIView):
         for i in range(len(data)):
             user = list(User.objects.filter(id=data[i]["author_id"]))[0]
             data[i]['name'] = user.name
+            data[i]['id'] = str(data[i]['id'])
 
         return Response(data, status.HTTP_200_OK)
 
@@ -169,6 +170,9 @@ def login(request):
     user = authenticate(request, username=username, password=password)
 
     if user is not None:
-        return Response({'message': 'Logged in'}, status.HTTP_202_ACCEPTED)
+        return Response({'message': 'Logged in', 'user': username}, status.HTTP_202_ACCEPTED)
     else:
         return Response({'message': 'Invalid credentials'}, status.HTTP_401_UNAUTHORIZED)
+
+class AddComment(CreateAPIView):
+    serializer_class = CommentSerializer

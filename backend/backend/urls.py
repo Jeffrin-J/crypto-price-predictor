@@ -27,4 +27,5 @@ urlpatterns = [
     path('api/getTweets/', GetTweets.as_view()),
     path('api/registerUser/', RegisterUser.as_view()),
     path('api/login/', login),
+    path('api/addComment/', AddComment.as_view())
 ]

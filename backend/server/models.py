@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User as DefaultUser
 
 # Create your models here.
 
@@ -29,3 +30,11 @@ class Tweet(models.Model):
     id = models.PositiveBigIntegerField(primary_key=True)
     author_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     text = models.TextField()
+
+class Comment(models.Model):
+    
+    id = models.AutoField(primary_key=True)
+    comment = models.TextField()
+    tweet_id = models.ForeignKey(Tweet, on_delete=models.CASCADE, null=True, blank=True)
+    author_id = models.ForeignKey(DefaultUser, on_delete=models.CASCADE, null=True, blank=True)
+    timestamp = models.DateTimeField(auto_now_add=True)

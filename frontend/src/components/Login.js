@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import { API_URL } from "../constants";
 import { useDispatch } from "react-redux";
 import { setLogin } from '../slices/login';
+import { setActive } from '../slices/active';
 
 const { Content } = Layout;
 const { Title } = Typography;
@@ -17,7 +18,9 @@ export default function Login() {
         axios.post(API_URL+'/login/', values)
         .then((res)=>{
             localStorage.setItem('logged', true)
+            localStorage.setItem('user', res['data']['user'])
             dispatch(setLogin(true))
+            dispatch(setActive('forum'))
         })
         .catch((err)=>{setAlert('error')})
         console.log('Success:', values);
