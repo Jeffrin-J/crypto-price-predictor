@@ -21,11 +21,13 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/getCoins/', getCoinData),
     path('api/retrieveCoinsData/', retrieveCoinData),
+    path('api/getHistData/', getHistoricalData),
     path('api/getCoinData/<pk>/', GetCoinData.as_view()),
     path('api/getOHLCData/<str:uuid>/', getOHLCData),
     path('api/getTwitterUsers/', get_twitter_users),
     path('api/getTweets/', GetTweets.as_view()),
     path('api/registerUser/', RegisterUser.as_view()),
     path('api/login/', login),
-    path('api/addComment/', AddComment.as_view())
+    path('api/addComment/', AddComment.as_view()),
+    path('api/analyzeTweets/', analyze_tweets)
 ]

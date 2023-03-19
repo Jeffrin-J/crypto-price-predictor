@@ -6,13 +6,13 @@ from django.contrib.auth.models import User as DefaultUser
 class Coins(models.Model):
     symbol = models.CharField(max_length=30)
     uuid = models.CharField(max_length=30)
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=100)
     marketCap = models.FloatField()
     price = models.FloatField()
     listedAt = models.BigIntegerField()
     tier = models.IntegerField()
     rank = models.IntegerField(primary_key=True)
-    change = models.FloatField()
+    change = models.FloatField(null=True)
     iconUrl = models.URLField()
 
     class Meta:
@@ -30,6 +30,7 @@ class Tweet(models.Model):
     id = models.PositiveBigIntegerField(primary_key=True)
     author_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     text = models.TextField()
+    coin = models.TextField()
 
 class Comment(models.Model):
     
