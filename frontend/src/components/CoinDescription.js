@@ -5,6 +5,17 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from "react-redux";
 import { API_URL } from '../constants';
 import Chart from 'react-apexcharts'
+import BTC from '../output/BTC_plot.png'
+import ETH from '../output/ETH_plot.png'
+import XRP from '../output/XRP_plot.png'
+import DOT from '../output/DOT_plot.png'
+import DOGE from '../output/DOGE_plot.png'
+import ALGO from '../output/ALGO_plot.png'
+import AVAX from '../output/AVAX_plot.png'
+import MANA from '../output/MANA_plot.png'
+import LTC from '../output/LTC_plot.png'
+import MATIC from '../output/MATIC_plot.png'
+import SAND from '../output/SAND_plot.png'
 
 export default function CoinDescription() {
 
@@ -12,10 +23,45 @@ export default function CoinDescription() {
     const [data, setData] = useState({})
     const [graphData, setGraphData] = useState([])
     const {Title} = Typography
+    const [src, setSrc] = useState()
 
     useEffect(() => {
         axios.get(API_URL+`/getCoinData/${coin}/`).then(
             (res) => {
+                if(res.data.symbol=='BTC')
+                {
+                    setSrc(BTC)
+                }
+                else if(res.data.symbol=='ETH'){
+                    setSrc(ETH)
+                }
+                else if(res.data.symbol=='XRP'){
+                    setSrc(XRP)
+                }
+                else if(res.data.symbol=='ALGO'){
+                    setSrc(ALGO)
+                }
+                else if(res.data.symbol=='AVAX'){
+                    setSrc(AVAX)
+                }
+                else if(res.data.symbol=='DOGE'){
+                    setSrc(DOGE)
+                }
+                else if(res.data.symbol=='MATIC'){
+                    setSrc(MATIC)
+                }
+                else if(res.data.symbol=='DOT'){
+                    setSrc(DOT)
+                }
+                else if(res.data.symbol=='LTC'){
+                    setSrc(LTC)
+                }
+                else if(res.data.symbol=='SAND'){
+                    setSrc(SAND)
+                }
+                else if(res.data.symbol=='MANA'){
+                    setSrc(MANA)
+                }
                 setData(res.data)
                 axios.get(API_URL+`/getOHLCData/${res.data['uuid']}/`).then(
                     (response) => {
@@ -105,7 +151,7 @@ export default function CoinDescription() {
                         
                     </Col>
                     <Col span={12}>
-                        <Chart
+                        {/* <Chart
                         series={[{data: graphData}]}
                         options={{
                             chart: {
@@ -127,7 +173,9 @@ export default function CoinDescription() {
                           }}
                           type="candlestick" 
                           height={350}
-                        />
+                        /> */}
+                        
+                        <img src={src} width={600} height={400}/>
                     </Col>
                 </Row>
             </div>

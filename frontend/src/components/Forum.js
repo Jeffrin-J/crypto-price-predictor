@@ -59,7 +59,7 @@ export default function Forum(props) {
                 {tweet['text']}
               </Col>
             </Row>
-            {loginStatus===true && 
+            {/* {loginStatus===true && 
             <Row>
               <Col span={20} offset={4}>
                 <Input.Group compact>
@@ -68,7 +68,7 @@ export default function Forum(props) {
                 </Input.Group>
               </Col>
             </Row>
-            }
+            } */}
             
             </Space>
           </div>)})}
